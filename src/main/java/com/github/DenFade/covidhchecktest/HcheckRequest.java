@@ -87,7 +87,7 @@ public class HcheckRequest {
         String result_code = "SUCCESS";
 
         Map<String, String> params = new HashMap<>();
-        params.put("qstnCrtfcNoEncpt", no_encpt);
+        params.put("qstnCrtfcNoEncpt", Utils.encodeURI(no_encpt));
         params.put("rtnRsltCode", result_code);
         params.put("schulNm", "");
         params.put("stdntName", "");
@@ -110,7 +110,7 @@ public class HcheckRequest {
                 .build();
         try {
             Response res = ohc.newCall(request).execute();
-            System.out.println(res.body().string());
+            System.out.println(new JSONObject(res.body().string()).toString(4));
         } catch (IOException e){
             e.printStackTrace();
         }
